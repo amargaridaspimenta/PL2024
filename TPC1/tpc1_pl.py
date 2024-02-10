@@ -1,7 +1,6 @@
 import pandas as pd # Esta biblioteca permite ler e escrever dados em vários formatos sendo por isso útil na realização deste TPC1
 
 def processar_dataset(arquivo):
-
     # Dicionário de dados a serem processados
     dados = {
         'modalidades': set(),
@@ -26,9 +25,12 @@ def processar_dataset(arquivo):
         else:
             dados['inaptos'] += 1
 
-    # Obtem a menor e a maior idade dos atletas para auxiliar na criaçao dos intervalos
+    # Obtem a menor e a maior idade dos atletas para auxiliar na criação dos intervalos
     menor_idade = df['idade'].min()
     maior_idade = df['idade'].max()
+
+    # Ajusta a idade mínima para que nos intervalos comecem com um multiplo de 5
+    menor_idade -= menor_idade % 5
 
     # Calcula os intervalos de idade
     intervalo = 5
@@ -48,7 +50,7 @@ def processar_dataset(arquivo):
         else:
             dados['inaptos'] += 1
 
-        # As idades sao percorridas no dicionario e é verificado se a idade de cada atleta está dentro das faixas etárias, atualizando assim a contagem de atletas
+        # As idades são percorridas no dicionário e é verificado se a idade de cada atleta está dentro das faixas etárias, atualizando assim a contagem de atletas
         for faixa_etaria in dados['idade']:
             faixa_min, faixa_max = map(int, faixa_etaria.strip('[]').split('-'))
             if faixa_min <= idade <= faixa_max:
@@ -56,7 +58,7 @@ def processar_dataset(arquivo):
 
     modalidades_ordenadas = sorted(list(dados['modalidades']))
 
-    # Calclua a percentagem dos atletas aptos e inaptos
+    # Calcula a porcentagem dos atletas aptos e inaptos
     total_atletas = dados['aptos'] + dados['inaptos']
     percent_aptos = (dados['aptos'] / total_atletas) * 100
     percent_inaptos = (dados['inaptos'] / total_atletas) * 100
@@ -73,6 +75,19 @@ def processar_dataset(arquivo):
     for faixa_etaria, count in dados['idade'].items():
         print(f"{faixa_etaria}: {count}")
 
-# Chama a função para processar o dataset com o caminho para o arquivo emd.csv
-processar_dataset('C:\\Users\\marga\\OneDrive\\Ambiente de Trabalho\\emd.csv')
+    # Cria um ficheiro txt onde é possível verificar os resultados obtidos tendo em conta os dados do ficheiro
+    with open('informacoes.txt', 'w') as txtfile:
+        txtfile.write("# LISTA ORDENADA ALFABETICAMENTE DAS MODALIDADES DESPORTIVAS! #\n\n")
+        for modalidade in modalidades_ordenadas:
+            txtfile.write(modalidade + '\n')
 
+        txtfile.write("\n# PERCENTAGEM DE ATLETAS APTOS E INAPTOS PARA A PRATICA DESPORTIVA! #\n\n")
+        txtfile.write(f"{percent_inaptos:.2f} por cento dos atletas encontram-se inaptos.\n")
+        txtfile.write(f"{percent_aptos:.2f} por cento dos atletas encontram-se aptos.\n")
+
+        txtfile.write("\n# DISTRIBUICAO DE ATLETAS POR FAIXA ETARIA! #\n\n")
+        for faixa_etaria, count in dados['idade'].items():
+            txtfile.write(f"{faixa_etaria}: {count}\n")
+
+# Chama a função para processar o dataset com o caminho para o arquivo emd.csv
+processar_dataset('C:\\Users\\marga\\OneDrive\\Ambiente de Trabalho\\PL2024\\TPC1\\emd.csv')

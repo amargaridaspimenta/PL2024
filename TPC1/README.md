@@ -17,3 +17,6 @@ A função `processar_dataset` imprime os resultados pedidos, sendo eles:
 - Uma lista ordenada alfabeticamente das modalidades desportivas;
 - As percentagens dos atletas aptos e inaptos;
 - Distribuição dos atletas por faixa etária;
+
+# Informações
+Após o programa ser executado com sucesso, é produzido um arquivo `informacoes.txt` onde é possível verificar o resultado obtido a partir dos dados do ficheiro fornecido.
