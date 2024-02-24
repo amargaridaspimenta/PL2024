@@ -1,0 +1,18 @@
+Texto do arquivo: on 27 12 ON 1 off 0 monad 1 =
+Soma total: 41
+Texto do arquivo: on 27 12 ON 1 off 0 moNaD 1 =
+Soma total: 41
+Texto do arquivo: on 27 12 ON 1 off 0 on 1 =
+Soma total: 41
+Texto do arquivo: monad 5 on 3 off 4 on 1 =
+Soma total: 9
+Texto do arquivo: on 5 on 3 off 4 on 1 =
+Soma total: 9
+Texto do arquivo: off 7 on 1 on 3 on 1 =
+Soma total: 5
+Texto do arquivo: oFfshore 7 on 1 on 3 on 1 =
+Soma total: 5
+Texto do arquivo: on 1 inOffsrx 3 on 1 on 5 =
+Soma total: 7
+Texto do arquivo: on 1 off 3 on 1 on 5 =
+Soma total: 7
